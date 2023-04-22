@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-fastapi-pod
+  labels:
+    app: my-fastapi-app
+spec:
+  containers:
+    - name: my-fastapi-container
+      image: dyddkdlel33/my-fastapi-app
+      ports:
+        - containerPort: 30000
