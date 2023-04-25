@@ -30,6 +30,6 @@ spec:
     app: my-tf-serving-restapi-app
   ports:
     - name: http
-      port: 30001
-      targetPort: 30001
+      port: 30001 # Service Port
+      targetPort: 8501 # containerPort와 일치
   type: LoadBalancer
