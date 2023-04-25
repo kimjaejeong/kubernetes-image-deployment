@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-tf-serving-restapi-pod
+spec:
+  replicas: 3  # 현재 실행 중인 Pod의 개수를 3으로 변경
+  selector:
+    matchLabels:
+      app: my-tf-serving-restapi-app
+  template:
+    metadata:
+      labels:
+        app: my-tf-serving-restapi-app
+    spec:
+      containers:
+      - name: my-tf-serving-restapi-container
+        image: dyddkdlel33/my-tf-serving-restapi-app
+        ports:
+          - containerPort: 8501 # tf-serving 애플리케이션이 사용하는 포트
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-tf-serving-restapi-service
+  labels:
+    app: my-tf-serving-restapi-app
+spec:
+  selector:
+    app: my-tf-serving-restapi-app
+  ports:
+    - name: http
+      port: 30001
+      targetPort: 30001
+  type: LoadBalancer
