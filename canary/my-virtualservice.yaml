@@ -14,16 +14,16 @@ spec:
       route:
         - destination:
             host: fastapi-service
-            subset: v01-group
-            weight: 80
             port:
               number: 30000
+            subset: v01-group
+          weight: 80
         - destination:
             host: fastapi-service
-            subset: v02-group
-            weight: 20
             port:
               number: 30000
+            subset: v02-group
+          weight: 20
     - match:
         - uri:
             exact: /predictions/densenet161
