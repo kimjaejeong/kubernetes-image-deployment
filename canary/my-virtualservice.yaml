@@ -13,14 +13,14 @@ spec:
             exact: /
       route:
         - destination:
-              host: fastapi-service
-              subset: v01-group
+            host: fastapi-service
+            subset: v01-group
             weight: 80
             port:
               number: 30000
         - destination:
-              host: fastapi-service
-              subset: v02-group
+            host: fastapi-service
+            subset: v02-group
             weight: 20
             port:
               number: 30000
