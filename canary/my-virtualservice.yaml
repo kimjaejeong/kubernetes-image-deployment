@@ -17,13 +17,13 @@ spec:
             port:
               number: 30000
               subset: v01-group
-            weight: 80
+              weight: 80
         - destination:
             host: fastapi-service
             port:
               number: 30000
               subset: v02-group
-            weight: 20
+              weight: 20
     - match:
         - uri:
             exact: /predictions/densenet161
@@ -55,3 +55,6 @@ spec:
     - labels:
         version: v02
       name: v02-group
+
+
+문제 해결해줘
