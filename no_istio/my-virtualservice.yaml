@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: my-virtualservice
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - my-gateway
+  http:
+    - match:
+        - uri:
+            exact: /
+      route:
+        - destination:
+            host: fastapi-service
+            port:
+              number: 30000
+    - match:
+        - uri:
+            exact: /predictions/densenet161
+      route:
+        - destination:
+            host: torch-serving-service
+            port:
+              number: 8080
+    - match:
+        - uri:
+            exact: /v1/models/test_model:predict
+      route:
+        - destination:
+            host: tf-serving-service
+            port:
+              number: 8501
