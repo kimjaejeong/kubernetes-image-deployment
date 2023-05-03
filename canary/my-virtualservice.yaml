@@ -4,7 +4,7 @@ metadata:
   name: my-virtualservice
 spec:
   hosts:
-    - "*"
+    - fastapi-service.default.svc.cluster.local
   gateways:
     - my-gateway
   http:
@@ -13,25 +13,13 @@ spec:
             exact: /
       route:
         - destination:
-            host: fastapi-service
+            host: fastapi-service.default.svc.cluster.local
             subset: v01-group
           weight: 80
         - destination:
-            host: fastapi-service
+            host: fastapi-service.default.svc.cluster.local
             subset: v02-group
           weight: 20
-    - match:
-        - uri:
-            exact: /predictions/densenet161
-      route:
-        - destination:
-            host: torch-serving-service
-    - match:
-        - uri:
-            exact: /v1/models/test_model:predict
-      route:
-        - destination:
-            host: tf-serving-service
 ---
 kind: DestinationRule       # Defining which pods should be part of each subset
 apiVersion: networking.istio.io/v1alpha3
