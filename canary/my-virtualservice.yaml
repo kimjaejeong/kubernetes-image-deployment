@@ -14,14 +14,10 @@ spec:
       route:
         - destination:
             host: fastapi-service
-            port:
-              number: 30000
             subset: v01-group
           weight: 80
         - destination:
             host: fastapi-service
-            port:
-              number: 30000
             subset: v02-group
           weight: 20
     - match:
@@ -30,16 +26,12 @@ spec:
       route:
         - destination:
             host: torch-serving-service
-            port:
-              number: 8080
     - match:
         - uri:
             exact: /v1/models/test_model:predict
       route:
         - destination:
             host: tf-serving-service
-            port:
-              number: 8501
 ---
 kind: DestinationRule       # Defining which pods should be part of each subset
 apiVersion: networking.istio.io/v1alpha3
