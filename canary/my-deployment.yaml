@@ -1,16 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-fastapi-pod
+  name: my-fastapi-pod-v01
 spec:
-  replicas: 1
+  replicas: 1  # 현재 실행 중인 Pod의 개수를 3으로 변경
   selector:
     matchLabels:
-      app: fastapi-service
+      app: my-fastapi-app
+      version: v01
   template:
     metadata:
       labels:
-        app: fastapi-service
+        app: my-fastapi-app
         version: v01
     spec:
       containers:
@@ -18,28 +19,6 @@ spec:
         image: dyddkdlel33/my-fastapi-app:latest
         ports:
           - containerPort: 30000 # FastAPI 애플리케이션이 사용하는 포트
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: my-fastapi-pod-v02
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: fastapi-service
-  template:
-    metadata:
-      labels:
-        app: fastapi-service
-        version: v02
-    spec:
-      containers:
-      - name: my-fastapi-container
-        image: dyddkdlel33/my-fastapi-app:v02
-        ports:
-          - containerPort: 30000 # FastAPI 애플리케이션이 사용하는 포트
-
 
 ---
 apiVersion: apps/v1
@@ -47,7 +26,7 @@ kind: Deployment
 metadata:
   name: my-tf-serving-restapi-pod
 spec:
-  replicas: 1
+  replicas: 1  # 현재 실행 중인 Pod의 개수를 3으로 변경
   selector:
     matchLabels:
       app: my-tf-serving-restapi-app
@@ -67,7 +46,7 @@ kind: Deployment
 metadata:
   name: my-torch-serving-pod
 spec:
-  replicas: 1
+  replicas: 1  # 현재 실행 중인 Pod의 개수를 3으로 변경
   selector:
     matchLabels:
       app: my-torch-serving-app

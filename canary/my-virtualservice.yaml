@@ -14,36 +14,38 @@ spec:
       route:
         - destination:
             host: fastapi-service
-            subset: v01-group
-          weight: 80
+            subset: v01
+            port:
+              number: 30000
+          weight: 90
         - destination:
             host: fastapi-service
-            subset: v02-group
-          weight: 20
+            subset: v02
+            port:
+              number: 30000
+          weight: 10
     - match:
         - uri:
             exact: /predictions/densenet161
       route:
         - destination:
             host: torch-serving-service
+            port:
+              number: 8080
     - match:
         - uri:
             exact: /v1/models/test_model:predict
       route:
         - destination:
             host: tf-serving-service
----
-kind: DestinationRule       # Defining which pods should be part of each subset
-apiVersion: networking.istio.io/v1alpha3
-metadata:
-  name: grouping-rules-for-our-canary-release # This can be anything you like.
-  namespace: default
-spec:
-  host: fastapi-service # Service
+            port:
+              number: 8501
   subsets:
-    - labels:   # SELECTOR.
-        version: v01 # find pods with label "safe"
-      name: v01-group
-    - labels:
+    - name: v01
+      labels:
+        app: my-fastapi-app
+        version: v01
+    - name: v02
+      labels:
+        app: my-fastapi-app
         version: v02
-      name: v02-group
