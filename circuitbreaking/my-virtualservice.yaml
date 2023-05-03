@@ -40,17 +40,3 @@ spec:
             host: tf-serving-service
             port:
               number: 8501
----
-kind: DestinationRule
-apiVersion: networking.istio.io/v1alpha3
-metadata:
-  name: circuit-breaker-for-the-entire-default-namespace
-  namespace: default
-spec:
-  host: fastapi-service # Service
-  trafficPolicy:
-    outlierDetection: # Circuit Breakers HAVE TO BE SWITCHED ON
-      maxEjectionPercent: 100
-      consecutive5xxErrors: 2
-      interval: 10s
-      baseEjectionTime: 30s
