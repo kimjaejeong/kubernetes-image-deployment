@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-fastapi-pod-v01
+spec:
+  replicas: 1  # 현재 실행 중인 Pod의 개수를 3으로 변경
+  selector:
+    matchLabels:
+      app: my-fastapi-app
+      version: v01
+  template:
+    metadata:
+      labels:
+        app: my-fastapi-app
+        version: v01
+    spec:
+      containers:
+      - name: my-fastapi-container
+        image: dyddkdlel33/my-fastapi-app:latest
+        ports:
+          - containerPort: 30000 # FastAPI 애플리케이션이 사용하는 포트
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-fastapi-pod-v03
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-fastapi-app
+      version: v03
+  template:
+    metadata:
+      labels:
+        app: my-fastapi-app
+        version: v03
+    spec:
+      containers:
+      - name: my-fastapi-container
+        image: dyddkdlel33/my-fastapi-app:v03
+        ports:
+          - containerPort: 30000 # FastAPI 애플리케이션이 사용하는 포트
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-tf-serving-restapi-pod
+spec:
+  replicas: 1  # 현재 실행 중인 Pod의 개수를 3으로 변경
+  selector:
+    matchLabels:
+      app: my-tf-serving-restapi-app
+  template:
+    metadata:
+      labels:
+        app: my-tf-serving-restapi-app
+    spec:
+      containers:
+      - name: my-tf-serving-restapi-container
+        image: dyddkdlel33/my-tf-serving-restapi-app
+        ports:
+          - containerPort: 8501 # tf-serving 애플리케이션이 사용하는 포트
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-torch-serving-pod
+spec:
+  replicas: 1  # 현재 실행 중인 Pod의 개수를 3으로 변경
+  selector:
+    matchLabels:
+      app: my-torch-serving-app
+  template:
+    metadata:
+      labels:
+        app: my-torch-serving-app
+    spec:
+      containers:
+      - name: my-torch-serving-container
+        image: dyddkdlel33/my-torch-serving-app
+        ports:
+          - containerPort: 8080 # torchserving 애플리케이션이 사용하는 포트

@@ -1,0 +1,56 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: my-virtualservice
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - my-gateway
+  http:
+    - match:
+        - uri:
+            exact: /
+      route:
+        - destination:
+            host: fastapi-service
+            subset: v01
+            port:
+              number: 30000
+          weight: 50
+        - destination:
+            host: fastapi-service
+            subset: v03
+            port:
+              number: 30000
+          weight: 50
+    - match:
+        - uri:
+            exact: /predictions/densenet161
+      route:
+        - destination:
+            host: torch-serving-service
+            port:
+              number: 8080
+    - match:
+        - uri:
+            exact: /v1/models/test_model:predict
+      route:
+        - destination:
+            host: tf-serving-service
+            port:
+              number: 8501
+---
+kind: DestinationRule
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: circuit-breaker-for-the-entire-default-namespace
+  namespace: default
+spec:
+  host: fastapi-service # Service
+  trafficPolicy:
+    outlierDetection: # Circuit Breakers HAVE TO BE SWITCHED ON
+      maxEjectionPercent: 100
+      consecutive5xxErrors: 2
+      interval: 10s
+      baseEjectionTime: 30s
