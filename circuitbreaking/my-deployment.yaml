@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: my-fastapi-container
-        image: dyddkdlel33/my-fastapi-app:v03
+        image: dyddkdlel33/my-fastapi-app:error
         ports:
           - containerPort: 30000 # FastAPI 애플리케이션이 사용하는 포트
 ---
