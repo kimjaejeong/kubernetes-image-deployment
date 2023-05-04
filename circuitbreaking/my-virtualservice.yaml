@@ -35,7 +35,7 @@ spec:
           percent: 100
         abort:
           httpStatus: 500
-          errorType: gateway-error
+#          errorType: gateway-error
           errorRate:
             percent: 99
     - match:
