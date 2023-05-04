@@ -36,8 +36,8 @@ spec:
         abort:
           httpStatus: 500
           errorType: gateway-error
-            errorRate:
-              percent: 99
+          errorRate:
+            percent: 99
     - match:
         - uri:
             exact: /predictions/densenet161
