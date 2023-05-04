@@ -17,11 +17,13 @@ spec:
             subset: v01
             port:
               number: 30000
+            weight: 80
         - destination:
             host: fastapi-service
             subset: v03
             port:
               number: 30000
+            weight: 20
     - match:
         - uri:
             exact: /predictions/densenet161
