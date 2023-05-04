@@ -35,7 +35,7 @@ spec:
           percent: 100
         abort:
           httpStatus: 500
-          percent: 100 # Abort 50% of requests to test backend resilience
+          percent: 50 # Abort 50% of requests to test backend resilience
     - match:
         - uri:
             exact: /predictions/densenet161
