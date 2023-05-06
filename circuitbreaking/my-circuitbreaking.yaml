@@ -5,6 +5,13 @@ metadata:
   namespace: default
 spec:
   host: fastapi-service # Service
+  subsets:
+    - labels: # SELECTOR.
+        version: v01 # find pods with label "safe"
+      name: v01
+    - labels:
+        version: v03
+      name: v03
   trafficPolicy:
     connectionPool:
       tcp:
