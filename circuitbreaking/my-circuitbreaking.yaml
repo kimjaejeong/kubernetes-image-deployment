@@ -6,8 +6,14 @@ metadata:
 spec:
   host: fastapi-service # Service
   trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 1
+      http:
+        http1MaxPendingRequests: 1
+        maxRequestsPerConnection: 1
     outlierDetection: # Circuit Breakers HAVE TO BE SWITCHED ON
       maxEjectionPercent: 100
-      consecutive5xxErrors: 2
-      interval: 10s
+      consecutiveErrors: 2
+      interval: 1s
       baseEjectionTime: 30s
