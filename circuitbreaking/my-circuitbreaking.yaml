@@ -15,7 +15,7 @@ spec:
       name: v03
   trafficPolicy:
     outlierDetection: # Circuit Breakers HAVE TO BE SWITCHED ON
-      maxEjectionPercent: 100
-      consecutive5xxErrors: 2
-      interval: 10s
-      baseEjectionTime: 30s
+      maxEjectionPercent: 100 # 모든 Pod가 제거될 수 있도록 100%로 설정
+      consecutive5xxErrors: 2 # 연속적인 5xx 오류의 수
+      interval: 10s # 오류를 평가할 시간 간격 ex) 10초마다 consecutive5xxErrors에 따라 Pod가 제거될지 여부 평가
+      baseEjectionTime: 2m # Circuit Breaker로부터 제거된 후 재배치되기까지의 시간
