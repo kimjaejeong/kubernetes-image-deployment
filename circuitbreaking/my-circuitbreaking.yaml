@@ -14,14 +14,8 @@ spec:
         version: v03
       name: v03
   trafficPolicy:
-    connectionPool:
-      tcp:
-        maxConnections: 1
-      http:
-        http1MaxPendingRequests: 1
-        maxRequestsPerConnection: 1
     outlierDetection: # Circuit Breakers HAVE TO BE SWITCHED ON
       maxEjectionPercent: 100
-      consecutiveErrors: 2
-      interval: 1s
+      consecutive5xxErrors: 2
+      interval: 10s
       baseEjectionTime: 30s
