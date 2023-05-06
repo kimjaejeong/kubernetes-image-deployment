@@ -24,6 +24,18 @@ spec:
             port:
               number: 30000
           weight: 20
+      retries:
+        attempts: 3
+        perTryTimeout: 1s
+        retryOn: 500
+      fault:
+        delay:
+          fixedDelay: 5s
+          percent: 100
+        abort:
+          httpStatus: 500
+          error:
+            percentage: 100
     - match:
         - uri:
             exact: /predictions/densenet161
@@ -41,17 +53,17 @@ spec:
             port:
               number: 8501
 ---
-#kind: DestinationRule       # Defining which pods should be part of each subset
-#apiVersion: networking.istio.io/v1alpha3
-#metadata:
-#  name: grouping-rules-for-our-canary-release # This can be anything you like.
-#  namespace: default
-#spec:
-#  host: fastapi-service # Service
-#  subsets:
-#    - labels:   # SELECTOR.
-#        version: v01 # find pods with label "safe"
-#      name: v01
-#    - labels:
-#        version: v03
-#      name: v03
+kind: DestinationRule       # Defining which pods should be part of each subset
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: grouping-rules-for-our-canary-release # This can be anything you like.
+  namespace: default
+spec:
+  host: fastapi-service # Service
+  subsets:
+    - labels:   # SELECTOR.
+        version: v01 # find pods with label "safe"
+      name: v01
+    - labels:
+        version: v03
+      name: v03
