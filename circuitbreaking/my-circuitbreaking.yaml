@@ -1,7 +1,8 @@
 kind: DestinationRule
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: circuit-breaker-for-the-entire-default-namespace
+#  name: circuit-breaker-for-the-entire-default-namespace
+  name: grouping-rules-for-our-canary-release
   namespace: default
 spec:
   host: fastapi-service # Service
