@@ -34,8 +34,7 @@ spec:
           percent: 100
         abort:
           httpStatus: 500
-          error:
-            percentage: 100
+          percent: 100
     - match:
         - uri:
             exact: /predictions/densenet161
