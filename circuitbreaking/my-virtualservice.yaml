@@ -24,20 +24,6 @@ spec:
             port:
               number: 30000
           weight: 20
-      # Add the following to enable circuit breaking:
-      retries:
-        attempts: 3
-        perTryTimeout: 1s
-        retryOn: 500 # Only retry on 503 Service Unavailable errors
-      fault:
-        delay:
-          fixedDelay: 5s
-          percent: 100
-        abort:
-          httpStatus: 500
-#          errorType: gateway-error
-          error:
-            percentage: 99
     - match:
         - uri:
             exact: /predictions/densenet161
