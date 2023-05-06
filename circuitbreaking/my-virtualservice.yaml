@@ -27,7 +27,7 @@ spec:
       retries:
         attempts: 3
         perTryTimeout: 1s
-        retryOn: 500
+        retryOn: "5xx"
       fault:
         delay:
           fixedDelay: 5s
