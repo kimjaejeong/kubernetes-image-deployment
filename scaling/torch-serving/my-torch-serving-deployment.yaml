@@ -19,11 +19,11 @@ spec:
           - containerPort: 8080 # torchserving 애플리케이션이 사용하는 포트
         resources:
           requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
+            memory: "256Mi"
             cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1"
 #            nvidia.com/gpu: 1 # GPU 적용
 ---
 apiVersion: v1
