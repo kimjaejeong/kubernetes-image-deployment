@@ -16,15 +16,15 @@ spec:
       - name: my-torch-serving-container
         image: dyddkdlel33/my-torch-serving-app
         ports:
-          - containerPort: 8080 # torchserving 애플리케이션이 사용하는 포트
+          - containerPort: 8080
         resources:
           requests:
-            memory: "256Mi"
-            cpu: "500m"
+            memory: "4G"         # 메모리 최소: 4GB
+            cpu: "4"             # CPU(Core) 개수 최소: 4개
           limits:
-            memory: "512Mi"
-            cpu: "1"
-#            nvidia.com/gpu: 1 # GPU 적용
+            memory: "8G"         # 메모리 최대: 8GB
+            cpu: "8"             # CPU(Core) 개수 최소: 8개
+            nvidia.com/gpu: "1"  # GPU 개수 최대: 1개
 ---
 apiVersion: v1
 kind: Service

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-torch-serving-pod
+spec:
+  selector:
+    matchLabels:
+      app: my-torch-serving-app
+  template:
+    metadata:
+      labels:
+        app: my-torch-serving-app
+    spec:
+      containers:
+      - name: my-torch-serving-container
+        image: dyddkdlel33/my-torch-serving-app
+        ports:
+          - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: torch-serving-service
+  labels:
+    app: my-torch-serving-app
+spec:
+  selector:
+    app: my-torch-serving-app
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
