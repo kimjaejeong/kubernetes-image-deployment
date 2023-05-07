@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-torch-serving-pod
+spec:
+  replicas: 3  # 현재 실행 중인 Pod의 개수를 3으로 변경
+  selector:
+    matchLabels:
+      app: my-torch-serving-app
+  template:
+    metadata:
+      labels:
+        app: my-torch-serving-app
+    spec:
+      containers:
+      - name: my-torch-serving-container
+        image: dyddkdlel33/my-torch-serving-app
+        ports:
+          - containerPort: 8080 # torchserving 애플리케이션이 사용하는 포트
+        resources:
+          limits:
+            cpu: 1
+            memory: 1Gi
+            nvidia.com/gpu: 1 # GPU 적용
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-torch-serving-service
+  labels:
+    app: my-torch-serving-app
+spec:
+  selector:
+    app: my-torch-serving-app
+  ports:
+    - name: http
+      port: 30002
+      targetPort: 8080
+  type: LoadBalancer
