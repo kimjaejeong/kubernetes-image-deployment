@@ -1,0 +1,2 @@
+- 참고자료
+  - https://velog.io/@minbrok/Kubernetes-Kafka-%EC%84%B8%ED%8C%85-%EB%B0%8F-Confluent-Kafka-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0
