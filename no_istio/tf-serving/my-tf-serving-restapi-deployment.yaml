@@ -32,4 +32,4 @@ spec:
     - name: http
       port: 30001 # Service Port
       targetPort: 8501 # containerPort와 일치
-#  type: LoadBalancer
+  type: LoadBalancer
