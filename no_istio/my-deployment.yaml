@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: my-fastapi-pod
 spec:
-  replicas: 3  # 현재 실행 중인 Pod의 개수를 3으로 변경
+  replicas: 1  # 현재 실행 중인 Pod의 개수를 3으로 변경
   selector:
     matchLabels:
       app: my-fastapi-app
@@ -24,7 +24,7 @@ kind: Deployment
 metadata:
   name: my-tf-serving-restapi-pod
 spec:
-  replicas: 3  # 현재 실행 중인 Pod의 개수를 3으로 변경
+  replicas: 1  # 현재 실행 중인 Pod의 개수를 3으로 변경
   selector:
     matchLabels:
       app: my-tf-serving-restapi-app
@@ -44,7 +44,7 @@ kind: Deployment
 metadata:
   name: my-torch-serving-pod
 spec:
-  replicas: 3  # 현재 실행 중인 Pod의 개수를 3으로 변경
+  replicas: 1  # 현재 실행 중인 Pod의 개수를 3으로 변경
   selector:
     matchLabels:
       app: my-torch-serving-app
