@@ -1,0 +1,3 @@
+- 참고자료
+    - https://todaycodeplus.tistory.com/52
+      - K8S에서의 설치과정
